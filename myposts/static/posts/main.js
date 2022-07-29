@@ -1,8 +1,7 @@
-console.log('hello world')
-
 const loadmore = document.getElementById('load-btn')
 const posts = document.getElementById('post-box')
 const spinner = document.getElementById('spinner')
+const endbox = document.getElementById('end-box')
 
 // $.ajax({
 //     type: 'GET',
@@ -41,13 +40,21 @@ const getData= () => {
                                         <a href="#" class="btn btn-primary">Details</a>
                                     </div>
                                     <div class="col-2">
-                                        <a href="#" class="btn btn-primary">Like</a>
+                                        <a href="#" class="btn btn-primary">${el.liked ? `Unliked (${el.count})`: `Liked (${el.count})`}</a>
                                     </div>
                                 </div>
                             </div>
                         </div>`
                     });
                 }, 100)
+                if (response.size === 0) {
+                    endbox.textContent = 'No posts have been added'
+                }
+
+                else if (response.size <= visible){
+                    loadmore.classList.add('not-visible')
+                    endbox.textContent = 'No more posts to load'
+                }
             },
             error: function (error) {
                 console.log('error', error)
