@@ -3,17 +3,51 @@ const posts = document.getElementById('post-box')
 const spinner = document.getElementById('spinner')
 const endbox = document.getElementById('end-box')
 
-// $.ajax({
-//     type: 'GET',
-//     url: '/user/hello/',
-//     success: function (response) {
-//         console.log('success', response.text)
-//         helloworldbox.textContent = response.text
-//     },
-//     error: function (error) {
-//         console.log('error', error);
-//     }
-// })
+
+const getCookie= (name) => {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+const likeUnlikeposts = () =>{
+
+    const likeunlikeform = [...document.getElementsByClassName('like-unlike-form')]
+    likeunlikeform.forEach(form => form.addEventListener('submit', e=> {
+        e.preventDefault()
+        const clickedid = e.target.getAttribute('data-form-id')
+        const clickedbtn = document.getElementById(`like-unlike-${clickedid}`)
+
+        $.ajax({
+            type: 'POST',
+            url: "",
+            data: {
+                'csrfmiddlewaretoken' : csrftoken,
+                'pk':clickedid
+            },
+            success: function(response){
+                console.log(response)
+            },
+            error: function(error){
+                console.log(error)
+            }
+
+        });
+        
+    }));
+
+}
 
 let visible=3
 
@@ -40,7 +74,9 @@ const getData= () => {
                                         <a href="#" class="btn btn-primary">Details</a>
                                     </div>
                                     <div class="col-2">
-                                        <a href="#" class="btn btn-primary">${el.liked ? `Unliked (${el.count})`: `Liked (${el.count})`}</a>
+                                        <form class="like-unlike-form" data-form-id="${el.id}">
+                                            <button href="#" class="btn btn-primary" id="like-unlike-${el.id}">${el.liked ? `Unliked (${el.count})`: `Liked (${el.count})`}</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
