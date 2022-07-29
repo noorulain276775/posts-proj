@@ -18,9 +18,11 @@ posts
     {{obj.title}} - {{obj.body}}<br/>
 
 {% endfor %} -->
-<div id="spinner">
+<div id="spinner" class="text-center">
     <div class="spinner-border" role="status"></div>
 </div>
 <div id="post-box"></div>
-<div id="hello-world"></div>
+<div class="text-center mb-3" id="end-box">
+    <button class="btn btn-primary" id="load-btn">Load More</button>
+</div>
 {% endblock body %}
