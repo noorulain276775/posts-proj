@@ -13,10 +13,14 @@ posts
 
 {% block body %}
 
-{% for obj in qs %}
+<!-- {% for obj in qs %}
 
     {{obj.title}} - {{obj.body}}<br/>
 
-{% endfor %}
+{% endfor %} -->
+<div id="spinner">
+    <div class="spinner-border" role="status"></div>
+</div>
+<div id="post-box"></div>
 <div id="hello-world"></div>
 {% endblock body %}
