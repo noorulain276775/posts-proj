@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block scripts %}
+
+<script src="{% static 'posts/main.js' %}" defer></script>
+
+{% endblock scripts %}
+
+{% block title %}
+posts
+{% endblock title %}
+
+{% block body %}
+
+{% for obj in qs %}
+
+    {{obj.title}} - {{obj.body}}<br/>
+
+{% endfor %}
+<div id="hello-world"></div>
+{% endblock body %}
