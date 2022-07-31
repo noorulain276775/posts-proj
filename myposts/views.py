@@ -66,3 +66,28 @@ def like_unliked_post(request):
             obj.liked.add(request.user)
         return JsonResponse({'liked': liked, 'count': obj.like_count})
 
+def post_detail_data_view(request, pk):
+    obj = Post.objects.get(pk=pk)
+    data = {
+        'id': obj.id,
+        'title': obj.title,
+        'body': obj.body,
+        'author': obj.author.user.username,
+        'logged_in': request.user.username,
+        'created': obj.created,
+        'updated': obj.updated
+    }
+    return JsonResponse({'data': data})
+
+
+
+def post_details(request, pk):
+    obj= Post.objects.get(pk=pk)
+    form = CreatePostForm()
+
+    context={
+        'obj': obj,
+        'form': form
+    }
+    return render(request, 'posts/details.html', context)
+

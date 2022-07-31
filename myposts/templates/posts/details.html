@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block scripts %}
+
+<script src="{% static 'posts/details.js' %}" defer></script>
+
+{% endblock scripts %}
+
+{% block title %}
+details
+{% endblock title %}
+
+{% block body %}
+    <div class="mt-2" id="post-box"></div>
+    <button id="back-btn" class="btn btn-info">back</button>
+    <button id="update-btn" class="btn btn-primary not-visible">update</button>
+    <button id="delete-btn" class="btn btn-danger not-visible">delete</button>
+    <div id="spinner" class="text-center">
+        <div class="spinner-border" role="status"></div>
+    </div>
+{% endblock body %}
