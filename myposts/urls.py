@@ -6,6 +6,8 @@ urlpatterns = [
     path('data/<int:num_posts>/', load_data_view, name='post-data'),
     path('like/', like_unliked_post, name='liked-unliked' ),
     path('posts/<pk>/', post_details, name='details'),
-    path('posts/<pk>/data/', post_detail_data_view, name="post-detail")
+    path('posts/<pk>/data/', post_detail_data_view, name="post-detail"),
+    path('posts/<pk>/update/', update_post, name="update-post"),
+    path('posts/<pk>/delete/', delete_post, name="delete-post"),
 
 ]

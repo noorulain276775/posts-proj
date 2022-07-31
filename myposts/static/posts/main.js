@@ -10,6 +10,12 @@ const alertbox = document.getElementById('alert-box')
 console.log('csrf', csrf[0].value)
 const url = window.location.href
 
+const deleted = localStorage.getItem('title')
+if (deleted){
+    handleAlerts('danger', `Post with title "${deleted} has been deleted"`)
+    localStorage.clear()
+}
+
 const getCookie = (name) => {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {

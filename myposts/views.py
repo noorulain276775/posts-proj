@@ -91,3 +91,20 @@ def post_details(request, pk):
     }
     return render(request, 'posts/details.html', context)
 
+def update_post(request, pk):
+    obj = Post.objects.get(pk=pk)
+    if is_ajax(request):
+        new_title = request.POST.get('title')
+        new_body = request.POST.get('body')
+        obj.title = new_title
+        obj.body= new_body
+        obj.save()
+        return JsonResponse({'title': new_title, 'body': new_body})
+
+
+def delete_post(request,pk):
+    obj=Post.objects.get(pk=pk)
+    if is_ajax(request):
+        obj.delete()
+        return JsonResponse({})
+
